@@ -1,16 +1,42 @@
-const arreglo = [1,2,3,4];
+// Funciones
 
-let arreglo2 = [...arreglo, 5];
+// const saludar = function(nombre){
+//     return `Hola, ${nombre}`;
+// }
 
-// arreglo.push(1);
-// arreglo.push(2);
-// arreglo.push(3);
-// arreglo.push(4);
+const saludar2 = (nombre) => {
+    return `Hola, ${nombre}`;
+}
+const saludar3 = (nombre) =>  `Hola, ${nombre}`;
 
-const arreglo3 = arreglo2.map(function(numero){
-    return numero*2;
-});
+console.log(saludar2('Vegeta'));
+console.log(saludar3('Krillin'));
 
-console.log(arreglo);
-console.log(arreglo2);
-console.log(arreglo3);
+const getUser = () => (
+    {
+        uid: 'ABD123',
+        username: 'toshioxgnu'
+    }
+)
+    
+
+console.log( getUser() );
+
+// Tarea
+// 1.- Transformar a funcion de flecha
+// 2.- Tiene que retornar un objeto implicito
+// 3.- Pruebas
+
+const getUsuarioActivo = (nombre) => (
+    {
+        uid: 'ABC12345',
+        username: nombre
+    }
+)
+
+
+const  usuarioActivo =  getUsuarioActivo('Fernando');
+const usuarioDeslogeado = getUsuarioActivo('Bulma');
+console.log(usuarioActivo);
+console.log(usuarioDeslogeado);
+
