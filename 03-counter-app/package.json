@@ -24,6 +24,11 @@
       "react-app/jest"
     ]
   },
+  "jestConfig": {
+    "modulePaths": [
+      "<rootDir>"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
