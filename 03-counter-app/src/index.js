@@ -8,4 +8,4 @@ import PrimeraApp from './PrimeraApp';
 
 const divRoot = document.querySelector('#root');  
 
-ReactDOM.render( <PrimeraApp saludo='Hola' />  , divRoot );
+ReactDOM.render( <CounterApp value={ 0 } />  , divRoot );

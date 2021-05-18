@@ -6,7 +6,7 @@ const PrimeraApp = ({ saludo, subtitulo }) => {
     return(  
         <>
             <pre>{ saludo }</pre>
-            <p> { subtitulo } </p>
+            <p>{ subtitulo }</p>
         </>
     );
 
