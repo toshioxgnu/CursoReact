@@ -1,3 +1,12 @@
 body {
     padding: 70px;
 }
+
+#quote {
+    padding-top: 15px;
+    background-color: #f7f6ef;
+}
+
+.blockquote-footer {
+    padding-top: 5px;
+}
