@@ -5,6 +5,7 @@ import {
     Route,
   } from "react-router-dom";
 import { LoginScreen } from '../components/login/LoginScreen';
+import { SearchPage } from '../components/pages/SearchPage';
 import DashboardRoutes from './DashboardRoutes';
 
 const AppRouter = () => {
@@ -13,6 +14,7 @@ const AppRouter = () => {
         <div>
             <Switch>
                 <Route exact path="/login" component={ LoginScreen } />
+                <Route exact path="/search" component={ SearchPage } />
 
                 <Route path="/"  component={ DashboardRoutes }  />
             </Switch>
