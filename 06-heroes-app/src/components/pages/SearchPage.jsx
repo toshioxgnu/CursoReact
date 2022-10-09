@@ -1,6 +1,30 @@
-import { HeroCard } from "../heroes/HeroCard"
+import {useNavigate} from 'react-router-dom';
+import { useForm } from "../../hooks/useForm";
+import { HeroCard } from "../heroes/HeroCard";
+
 
 export const SearchPage = () => {
+
+    const navigate = useNavigate();
+
+
+    const {
+        searchText,
+        onInputChange,
+    } = useForm({
+        searchText: ''
+    });
+
+     const onSearchSubmit  = (e) => {
+        e.preventDefault();
+
+        if( searchText.trim().length < 1  ) return;
+        
+
+
+
+     }  
+
     return (
        <>
         <h1>Search</h1>
@@ -10,12 +34,14 @@ export const SearchPage = () => {
         <div className="col-5"> 
             <h4>Searching</h4>
             <hr/>
-            <form>
+            <form onSubmit={ onSearchSubmit } >
                 <input type="text"
                         placeholder="Search a hero"
                         className="form-control"
                         name="searchText"
-                        autocomplete="off"
+                        autoComplete="off"
+                        value = {searchText}
+                        onChange = { onInputChange }
                  ></input>
                  <button className="btn btn-outline-primary mt-1" >
                     Search
