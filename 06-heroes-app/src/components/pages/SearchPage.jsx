@@ -1,12 +1,13 @@
-import {useNavigate} from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
+import React, { Component }  from 'react';
 import { useForm } from "../../hooks/useForm";
 import { HeroCard } from "../heroes/HeroCard";
 
 
 export const SearchPage = () => {
 
-    const navigate = useNavigate();
-
+    //TODO: investigar y cambiar de useNavigate a useLocation
+    const location = useLocation();
 
     const {
         searchText,
@@ -21,7 +22,7 @@ export const SearchPage = () => {
         if( searchText.trim().length < 1  ) return;
         
 
-
+        location.pathname = `?q=${searchText}`;
 
      }  
 
