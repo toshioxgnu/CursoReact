@@ -1,23 +1,29 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
+    Routes
   } from "react-router-dom";
 import { LoginScreen } from '../components/login/LoginScreen';
 import { SearchPage } from '../components/pages/SearchPage';
 import DashboardRoutes from './DashboardRoutes';
+import MarvelSreen from '../components/Marvel/MarvelScreen';
+import { HeroScreen } from '../components/heroes/HeroScreen';
+import DcScreen from '../components/dc/DcScreen';
 
 const AppRouter = () => {
     return (
         <Router>
         <div>
-            <Switch>
-                <Route exact path="/login" component={ LoginScreen } />
-                <Route exact path="/search" component={ SearchPage } />
+            <Routes>
+                <Route exact="true" path="/login" element={ <LoginScreen/> } />
+                <Route exact="true" path="/search" element={ <SearchPage/> } />
+                <Route exact="true" path="/marvel" element={ <MarvelSreen/> } />
+                <Route exact="true" path="/hero/:heroeId" element={ <HeroScreen/> } />
+                <Route exact="true" path="/dc" element={ <DcScreen/> } />
 
-                <Route path="/"  component={ DashboardRoutes }  />
-            </Switch>
+                <Route path="/"  element={ <DashboardRoutes/> }  />
+            </Routes>
         </div>
         </Router>
     )

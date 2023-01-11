@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 import React from 'react'
 
 export const HeroCard = ( { 
@@ -36,7 +36,7 @@ export const HeroCard = ( {
                             <small className="text-muted"> { first_appearance } </small>
                         </p>
 
-                        <Link to={ `./hero/${id}` }  >Ver Mas...</Link>
+                        <NavLink to={ `/hero/${id}` }  >Ver Mas...</NavLink>
                     </div>
                 </div>
                 

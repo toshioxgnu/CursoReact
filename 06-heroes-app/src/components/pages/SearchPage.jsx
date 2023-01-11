@@ -1,4 +1,5 @@
-import { Redirect, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import React, { Component }  from 'react';
 import { useForm } from "../../hooks/useForm";
 import { HeroCard } from "../heroes/HeroCard";
@@ -6,8 +7,11 @@ import { HeroCard } from "../heroes/HeroCard";
 
 export const SearchPage = () => {
 
-    //TODO: investigar y cambiar de useNavigate a useLocation
+    const navigate = useNavigate();
     const location = useLocation();
+
+    const query = queryString.parse(location.search);
+    console.log({query})
 
     const {
         searchText,
@@ -19,10 +23,9 @@ export const SearchPage = () => {
      const onSearchSubmit  = (e) => {
         e.preventDefault();
 
-        if( searchText.trim().length < 1  ) return;
+        // if( searchText.trim().length < 1  ) return;
         
-
-        location.pathname = `?q=${searchText}`;
+        navigate(`?q=${ searchText.toLowerCase().trim() }`);
 
      }  
 
