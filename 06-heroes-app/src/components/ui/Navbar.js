@@ -1,41 +1,45 @@
-import React from 'react'
-import {  NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+
 
 export const Navbar = () => {
+
+    const navigate = useNavigate();
+
+    const onLogout = () => {
+        navigate('/login', {
+            replace: true
+        });
+    }
+
     return (
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark p-2">
             
-            <NavLink 
+            <Link 
                 className="navbar-brand" 
                 to="/"
             >
                 Asociaciones
-            </NavLink>
+            </Link>
 
             <div className="navbar-collapse">
                 <div className="navbar-nav">
 
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/marvel"
                     >
                         Marvel
                     </NavLink>
 
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/dc"
                     >
                         DC
                     </NavLink>
+                    
                     <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
+                        className={ ({isActive}) => `nav-item nav-link  ${ isActive ? 'active':'' }` }
                         to="/search"
                     >
                         Search
@@ -43,16 +47,20 @@ export const Navbar = () => {
                 </div>
             </div>
 
-            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end">
                 <ul className="navbar-nav ml-auto">
-                    <NavLink 
-                        activeClassName="active"
-                        className="nav-item nav-link" 
-                        exact
-                        to="/login"
+                   
+                    <span className="nav-item nav-link text-primary">
+                        Fernando
+                    </span>
+
+                    <button
+                        className="nav-item nav-link btn"
+                        onClick={ onLogout }
                     >
                         Logout
-                    </NavLink>
+                    </button>
+
                 </ul>
             </div>
         </nav>

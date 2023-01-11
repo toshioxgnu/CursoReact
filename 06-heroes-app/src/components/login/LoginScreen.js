@@ -1,20 +1,27 @@
-import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
-export const LoginScreen = ({ history }) => {
+export const LoginScreen = () => {
 
-    const handleLogin = () => {
-        history.replace('/marvel');
-    }
+  const navigate = useNavigate();
 
-    return (
-        <div className="container mt-5">
-            <h1>Login Screen</h1>
-            <hr/>
+  const onLogin = () => {
+    navigate('/', {
+      replace: true
+    });
+  }
 
-            <button
-                className="btn btn-primary"
-                onClick={ handleLogin }
-            >Login</button>
-        </div>
-    )
+  return (
+    <div className="container mt-5">
+      <h1>Login</h1>
+      <hr />
+
+      <button 
+        className="btn btn-primary"
+        onClick={ onLogin }
+      >
+        Login
+      </button>
+
+    </div>
+  )
 }

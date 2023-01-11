@@ -2,7 +2,8 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    Routes
+    Routes,
+    Navigate
   } from "react-router-dom";
 import { LoginScreen } from '../components/login/LoginScreen';
 import { SearchPage } from '../components/pages/SearchPage';
@@ -10,22 +11,25 @@ import DashboardRoutes from './DashboardRoutes';
 import MarvelSreen from '../components/Marvel/MarvelScreen';
 import { HeroScreen } from '../components/heroes/HeroScreen';
 import DcScreen from '../components/dc/DcScreen';
+import { Navbar } from '../components/ui/Navbar';
 
 const AppRouter = () => {
     return (
+        <><Navbar />
         <Router>
-        <div>
-            <Routes>
-                <Route exact="true" path="/login" element={ <LoginScreen/> } />
-                <Route exact="true" path="/search" element={ <SearchPage/> } />
-                <Route exact="true" path="/marvel" element={ <MarvelSreen/> } />
-                <Route exact="true" path="/hero/:heroeId" element={ <HeroScreen/> } />
-                <Route exact="true" path="/dc" element={ <DcScreen/> } />
+            <div>
+                <Routes>
+                    <Route path="/login" element={<LoginScreen />} />
+                    <Route path="/search" element={<SearchPage />} />
+                    <Route path="/marvel" element={<MarvelSreen />} />
+                    <Route path="/hero/:heroeId" element={<HeroScreen />} />
+                    <Route path="/dc" element={<DcScreen />} />
 
-                <Route path="/"  element={ <DashboardRoutes/> }  />
-            </Routes>
-        </div>
+                    <Route path="/" element={<Navigate to="/marvel" />} />
+                </Routes>
+            </div>
         </Router>
+        </>
     )
 }
 

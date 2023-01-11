@@ -12,11 +12,11 @@ const DashboardRoutes = () => {
 
             <div className="container mt-5">
                 <Routes >
-                    <Route exact="true" path="/marvel" element={ <MarvelSreen/> } />
-                    <Route exact="true" path="/hero/:heroeId" element={ <HeroScreen/> } />
-                    <Route exact="true" path="/dc" element={ <DcScreen/> } />
+                    <Route  path="/marvel" element={ <MarvelSreen/> } />
+                    <Route  path="/hero/:heroeId" element={ <HeroScreen/> } />
+                    <Route  path="/dc" element={ <DcScreen/> } />
 
-                    <Route exact="true" replace to="/marvel" element={ <MarvelSreen/> }/>
+                    <Route  replace to="/marvel" element={ <MarvelSreen/> }/>
                 </Routes>
             </div>
         </Fragment>

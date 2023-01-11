@@ -1,61 +1,48 @@
 import React, { useMemo } from 'react'
-import { Navigate, Route, useParams } from 'react-router'
+import { Navigate, useParams, useNavigate } from 'react-router'
 import { getHeroesById } from '../selectors/getHeroById';
 
-export const HeroScreen = ({ history }) => {
+export const HeroScreen = () => {
 
     const { heroeId } = useParams();
+    const navigate = Navigate();
     
-    const hero = useMemo(() => getHeroesById(heroeId), heroeId)
+    const hero = useMemo(() => getHeroesById(heroeId), [heroeId])
 
-
-    if(!hero ){
-        return <Navigate to="/" />
+    const onNavigateBack = () => {
+        navigate(-1);
     }
 
-    const handleReturn = () => {
-        if(history.length <= 2) {
-            history.push('/');
-        }else{
-            history.goBack();
-        }
-        
+    if( !hero ) {
+        return <Navigate to="/marvel" />
     }
-
-    const {
-        superhero,
-        publisher,
-        alter_ego,
-        first_appearance,
-        characters
-    } = hero[0];
 
     return (
         <div className="row animate__animated  animate__fadeInLeft">
             <div className="col-md-4 ">
                 <img src={`../assets/heroes/${heroeId}.jpg`} 
-                    alt={ superhero }
+                    alt={ hero.superhero }
                     className="img-thumbnail"
                 />
 
             </div>
 
             <div className="col-md-8">
-                <h3>{superhero}</h3>
+                <h3>{ hero.superhero }</h3>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><b>Alter Ego:</b> {alter_ego}  </li>
-                    <li className="list-group-item"><b>Publicador:</b> {publisher}  </li>
-                    <li className="list-group-item"><b>Primera Aparicion:</b> {first_appearance}  </li>
+                    <li className="list-group-item"><b>Alter Ego:</b> { hero.alter_ego  }  </li>
+                    <li className="list-group-item"><b>Publicador:</b> { hero.publisher }  </li>
+                    <li className="list-group-item"><b>Primera Aparicion:</b> { hero.first_appearance }  </li>
                 </ul>
 
                 <h5>Personajes: </h5>
-                <p>{characters}</p>
+                <p>{ hero.characters }</p>
 
                 <hr/>
 
                 <button
                     className="btn btn-info"
-                    onClick={handleReturn}
+                    onClick={ onNavigateBack }
                 >Volver</button>
 
             </div>

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
-import React, { Component }  from 'react';
+import React  from 'react';
 import { useForm } from "../../hooks/useForm";
 import { HeroCard } from "../heroes/HeroCard";
 
@@ -10,8 +10,9 @@ export const SearchPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const query = queryString.parse(location.search);
-    console.log({query})
+    const {
+        q = ''
+    } = queryString.parse(location.search);
 
     const {
         searchText,
@@ -61,14 +62,12 @@ export const SearchPage = () => {
             <div
                 className="alert alert-primary "
             >
-                <HeroCard
-                    
-                />
+                Search a hero
             </div>
             <div
                 className="alert alert-danger "
             >
-                No hero in query <b>ABC</b>
+                No hero in query <b>{q}</b>
             </div>
         </div>
 
