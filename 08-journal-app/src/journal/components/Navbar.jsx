@@ -1,7 +1,7 @@
 import { LogoutRounded, MenuOutlined } from '@mui/icons-material'
 import { AppBar, Grid, IconButton, Toolbar, Typography } from '@mui/material'
 
-export const Navbar = ({ drawerWidth = 240 }) => {
+export const Navbar = ({ drawerWidth  }) => {
   return (
     <AppBar position='fixed' 
             sx = {{
@@ -28,7 +28,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
                     variant='h6' 
                     noWrap component='div'
                 >
-                    JoutnalApp
+                    JournalApp
                 </Typography>
 
                 <IconButton 
