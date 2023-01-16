@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { counterSlice } from './slices/counter'
-import { pokemonSlice } from './slices/pokemon'
 import { todosApi } from './apis'
+import { pokemonSlice } from './slices/pokemon'
+import { counterSlice } from './slices/counter'
+import { configureStore } from '@reduxjs/toolkit'
 
 
 export const store = configureStore({
