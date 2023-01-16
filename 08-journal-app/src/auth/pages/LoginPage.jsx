@@ -2,11 +2,26 @@ import { Link as RouterLink } from 'react-router-dom'
 import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout'
+import { useForm } from '../../hooks/'
+
 
 export const LoginPage = () => {
+
+  const { email,password, onInputChange }  = useForm({
+    email: 'jozho.g@gmail.com',
+    password: '123456'
+  });
+
+  const onSubmit = (e) => {
+    // console.log(email);
+    e.preventDefault();
+    console.log({email, password});
+    
+  }
+
   return (
     <AuthLayout title="Login" >
-        <form>
+        <form onSubmit={ onSubmit } >
           <Grid container          
           >
             <Grid item xs={12}  sx={{ mt: 2 }} >
@@ -15,7 +30,9 @@ export const LoginPage = () => {
                 type="email"
                 placeholder="correo@google.cl"
                 fullWidth
-                
+                name="email"
+                onChange={ onInputChange }
+                value={ email }
               />
             </Grid>
             <Grid item 
@@ -27,6 +44,9 @@ export const LoginPage = () => {
                 type="password"
                 placeholder="Password"
                 fullWidth
+                name="password"
+                onChange={ onInputChange }
+                value={ password }
               />
             </Grid>
             <Grid container 
@@ -35,7 +55,9 @@ export const LoginPage = () => {
               <Grid item 
                 xs={12} md={6}
               >
-                <Button variant='contained' fullWidth > Login </Button>
+                <Button variant='contained' fullWidth
+                  type="submit" 
+                > Login </Button>
               </Grid>
               <Grid item 
                 xs={12} md={6}
