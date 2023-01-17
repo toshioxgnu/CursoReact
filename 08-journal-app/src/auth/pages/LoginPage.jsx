@@ -3,9 +3,14 @@ import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks/'
+import { checkingCredentials } from '../../store/auth'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 export const LoginPage = () => {
+
+  const dispatch = useDispatch();
+  const { state : status } = useSelector( state => state.auth );
 
   const { email,password, onInputChange }  = useForm({
     email: 'jozho.g@gmail.com',
@@ -17,6 +22,10 @@ export const LoginPage = () => {
     e.preventDefault();
     console.log({email, password});
     
+  }
+
+  const onGoogleSignIn = () => {
+    dispatch( checkingCredentials(status) );
   }
 
   return (
@@ -62,7 +71,11 @@ export const LoginPage = () => {
               <Grid item 
                 xs={12} md={6}
               >
-                <Button variant='contained' fullWidth >  <Google /> <Typography sx={{ ml:1 }} > Google </Typography>  </Button>
+                <Button 
+                variant='contained' 
+                fullWidth 
+                onClick={ onGoogleSignIn }
+                >  <Google /> <Typography sx={{ ml:1 }} > Google </Typography>  </Button>
               </Grid>
             </Grid>
 
