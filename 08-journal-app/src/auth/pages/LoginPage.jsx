@@ -1,10 +1,10 @@
 import { Link as RouterLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout'
+import { checkingCredentials, startGoogleSignIn } from '../../store/auth'
 import { useForm } from '../../hooks/'
-import { checkingCredentials } from '../../store/auth'
-import { useDispatch, useSelector } from 'react-redux'
 
 
 export const LoginPage = () => {
@@ -21,11 +21,11 @@ export const LoginPage = () => {
     // console.log(email);
     e.preventDefault();
     console.log({email, password});
-    
+    dispatch( checkingCredentials(status) );
   }
 
   const onGoogleSignIn = () => {
-    dispatch( checkingCredentials(status) );
+    dispatch( startGoogleSignIn(status) );
   }
 
   return (
