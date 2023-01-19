@@ -1,9 +1,9 @@
-import React from "react"
 import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
+import React from "react"
 import { Link as RouterLink } from 'react-router-dom'
-import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks/'
+import { AuthLayout } from '../layout/AuthLayout'
 
 export const RegisterPage = () => {
 
@@ -13,8 +13,19 @@ export const RegisterPage = () => {
     displayName: 'Jose',
   }
 
+  const formValidations = {
+    email: [ (value) => value.includes('@')  , 'The email has to have an @'],
+    password: [ (value) => value.length >= 6 , 'Password must be at least 6 characters'],
+    displayName: [ (value) => value.length >= 1 , 'must put a name']
+  }
 
-  const { email, password, displayName, formState , onInputChange } = useForm(formData);
+  const { 
+    email, password, displayName, formState , onInputChange,
+    formValid, displayNameValid, emailValid, passwordValid
+     
+  } = useForm(formData, formValidations);
+
+  console.log(displayNameValid);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +47,8 @@ export const RegisterPage = () => {
                 name="displayName"
                 value={ displayName }
                 onChange={ onInputChange }
+                error
+                helperText="Name is required"
               />
             </Grid>
             <Grid item xs={12}  sx={{ mt: 2 }} >
