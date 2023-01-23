@@ -1,11 +1,11 @@
 import { Google } from "@mui/icons-material"
 import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import React, { useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/'
-import { AuthLayout } from '../layout/AuthLayout'
-import { useDispatch, useSelector } from "react-redux"
 import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks"
+import { AuthLayout } from '../layout/AuthLayout'
 
 export const RegisterPage = () => {
 
