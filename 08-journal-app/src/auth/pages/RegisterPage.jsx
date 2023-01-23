@@ -4,9 +4,12 @@ import React, { useState } from "react"
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/'
 import { AuthLayout } from '../layout/AuthLayout'
+import { useDispatch } from "react-redux"
+import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks"
 
 export const RegisterPage = () => {
 
+  const dispatch = useDispatch();
   const [formSubmitted, setformSubmitted] = useState(false);
 
 
@@ -33,7 +36,7 @@ export const RegisterPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setformSubmitted(true);
-    console.log(formState);
+    dispatch( startCreatingUserWithEmailPassword( formState ) )
   }
 
   // console.log(formValidations);
