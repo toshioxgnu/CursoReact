@@ -1,10 +1,10 @@
 import { Google } from "@mui/icons-material"
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
-import React, { useState } from "react"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
+import React, { useMemo, useState } from "react"
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/'
 import { AuthLayout } from '../layout/AuthLayout'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks"
 
 export const RegisterPage = () => {
@@ -12,6 +12,8 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formSubmitted, setformSubmitted] = useState(false);
 
+  const { status, errorMessage } = useSelector( (state) => state.auth );
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
   const formData = {
     email: '',
@@ -44,8 +46,6 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Register" >
-
-        <h1> FORM VALID { isFormValid ? 'Valid': 'False' } </h1>
 
         <form onSubmit={ onSubmit } >
           <Grid container          
@@ -92,7 +92,13 @@ export const RegisterPage = () => {
             </Grid>
             <Grid container 
                   spacing={ 2 } sx={{ mb:2, mt:2 }}
-            >
+              >
+              <Grid item 
+                xs={12} md={6}
+                display={ !!errorMessage ? '' : 'none' }
+              >
+                <Alert severity='error' >{ errorMessage  }</Alert>
+              </Grid>
               <Grid item 
                 xs={12} md={6}
               >
@@ -100,6 +106,7 @@ export const RegisterPage = () => {
                 variant='contained' 
                 fullWidth 
                 type="submit"
+                disabled={isCheckingAuthentication}
                 > Sign Up </Button>
               </Grid>
             </Grid>
