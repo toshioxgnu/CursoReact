@@ -28,6 +28,9 @@ export const startNewNote = () => {
         //!TODO: dispatch
         //dispatch( newNote )
 
+        newNote.id = newDoc.id;
+        
+
 
 
     }
