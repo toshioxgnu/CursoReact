@@ -1,21 +1,26 @@
+import { AddOutlined } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
+import { useDispatch, useSelector } from "react-redux"
+import { startNewNote } from "../../store/journal/thunks"
 import { JournalLayout } from "../layout/JournalLayout"
 import { NoteView, NothingSelectedView } from "../views"
-import {  AddOutlined } from "@mui/icons-material"
 
 
 
 export const JournalPage = () => {
+
+  const dispatch =  useDispatch();
+
+  const onClickNewNote = () => {
+    dispatch( startNewNote() );
+  }
+
   return (
     <JournalLayout>
-      {/* <Typography variant='p' component='p' >
-        Ex esse deserunt ipsum exercitation ea veniam proident ea. Qui eu Lorem sint id officia exercitation officia enim. Lorem irure do do qui do commodo sint incididunt elit aute ea fugiat minim. Pariatur ut deserunt qui culpa sunt amet occaecat nostrud eu qui amet voluptate. Minim consequat tempor sunt id irure duis ad eiusmod sunt incididunt ad mollit. Cillum laborum irure deserunt duis officia aute pariatur eiusmod anim eiusmod pariatur pariatur ad. Ipsum quis Lorem consectetur minim laborum ex.
-      </Typography> */}
-
-      {/* <NothingSelectedView /> */}
       <NoteView />
 
-      <IconButton 
+      <IconButton
+        onClick={ onClickNewNote } 
         size="large"
         sx={{
           color: 'white',
