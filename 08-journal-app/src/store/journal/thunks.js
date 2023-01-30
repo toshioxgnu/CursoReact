@@ -30,11 +30,10 @@ export const startNewNote = () => {
         newNote.id = newDoc.id;
         dispatch( addNewEmptyNote( newNote ) );
         dispatch( setActiveNote( newNote ) );
-
-        
-
-
-
     }
+}
+
+export const startLoagindNotes = () => {
+    
 }
 
