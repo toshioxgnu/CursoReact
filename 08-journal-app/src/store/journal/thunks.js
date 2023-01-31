@@ -34,6 +34,10 @@ export const startNewNote = () => {
 }
 
 export const startLoagindNotes = () => {
-    
+    return async( dispatch, getState ) => {
+        const { uid } = getState().auth;
+
+        console.log( uid );
+    }
 }
 
