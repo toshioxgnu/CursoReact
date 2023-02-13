@@ -1,17 +1,19 @@
 import { SaveRounded } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography } from "@mui/material"
-import { ImageGallery } from "../components/ImageGallery"
-import { useForm } from '../../hooks'
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useMemo } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import Swal from "sweetalert2"
+import 'sweetalert2/dist/sweetalert2.css'
+import { useForm } from '../../hooks'
 import { setActiveNote } from "../../store/journal/journalSlice"
 import { startSaveNote } from "../../store/journal/thunks"
+import { ImageGallery } from "../components/ImageGallery"
 
 
 export const NoteView = () => {
     
     const dispatch = useDispatch();
-    const { active:note } = useSelector( state => state.journal );
+    const { active:note, savedMessage, isSaving } = useSelector( state => state.journal );
 
     const { body, title, date ,onInputChange, formState } = useForm( note );
 
@@ -24,6 +26,12 @@ export const NoteView = () => {
     useEffect(() => {
         dispatch( setActiveNote(formState) );
     }, [formState]);
+
+    useEffect(() => {
+        if(savedMessage.length >0 ){
+            Swal.fire(' Nota Actualizada ', savedMessage, 'success');
+        }
+    }, [savedMessage]);
 
     // TODO: Imlementar dispatch
     const onSaveNote = () => {
@@ -46,7 +54,7 @@ export const NoteView = () => {
             <Button 
                 sx={{ color: "primary.main" }}
                 onClick={ onSaveNote }
-                // disabled={  }
+                disabled={ isSaving }
             >
                 <SaveRounded 
                     sx={{ fontSize: 30, mr: 1 }}
