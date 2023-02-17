@@ -1,4 +1,4 @@
-import { logout } from '../../../src/store/auth/authSlice';
+import { checkingCredentials, logout } from '../../../src/store/auth/authSlice';
 import { authSlice, login } from '../../../src/store/auth/authSlice';
 import { authenticatedState, demoUser, initialState } from '../../fixtures/authFixtures'
  
@@ -50,5 +50,10 @@ describe('Pruebas en el auth Slice', () => {
             errorMessage: errorMessage,
         });
     });
+
+    test('debe de realizar el checkingCredentials', () => {
+        const state = authSlice.reducer( authenticatedState, checkingCredentials() );
+        expect( state.status ).toBe('checking');
+    })
 
 });
