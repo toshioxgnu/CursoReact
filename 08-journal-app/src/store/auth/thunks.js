@@ -47,7 +47,7 @@ export const startLoginWithEmailPassword = ({email, password}) => {
 
         const result = await loginWithEmailPassword({ email, password });
 
-        if( !result.displayNameok ) return dispatch( logout( result.errorMessage ) );
+        if( !result.ok ) return dispatch( logout( result ) );
 
         dispatch(
             login(result)
