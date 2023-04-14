@@ -15,4 +15,5 @@ describe('Pruebas en Journal Thunks', () => {
 
         await startNewNote()(dispatch, getState);
     });
-})
+    
+});
