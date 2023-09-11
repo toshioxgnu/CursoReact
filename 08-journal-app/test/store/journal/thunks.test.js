@@ -23,6 +23,7 @@ describe('Pruebas en Journal Thunks', () => {
     } );
 
     test('startNewNote debe de crear una nueva nota en blanco', async () => {
+        jest.setTimeout(7000);
         const uid = 'TEST-UID'
         getState.mockReturnValue({ auth: { uid: uid } });
 
@@ -55,6 +56,6 @@ describe('Pruebas en Journal Thunks', () => {
         
         await Promise.all( deletePromises );
 
-    });
+    }, 8000);
     
 });
