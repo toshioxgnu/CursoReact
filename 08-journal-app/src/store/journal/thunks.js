@@ -1,15 +1,17 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { firebaseDB } from "../../firebase/config";
-import { addNewEmptyNote, deleteNoteById, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from "./journalSlice";
+import { addNewEmptyNote, deleteNoteById, savingNewNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from "./journalSlice";
 import { fileUpload, loadNotes } from "../../../helpers";
 
 export const startNewNote = () => {
     return async ( dispatch, getState ) => {
 
+        dispatch(savingNewNote());
+
         const { uid } = getState().auth; 
 
-        console.log(getState())
-        console.log('Start Note');
+        // console.log(getState())
+        // console.log('Start Note');
 
         const newNote = {
             title: '',
@@ -26,7 +28,7 @@ export const startNewNote = () => {
             newDoc, newNote
           );
 
-        console.log({newDoc, setDocResp});
+        // console.log({newDoc, setDocResp});
 
         newNote.id = newDoc.id;
         dispatch( addNewEmptyNote( newNote ) );

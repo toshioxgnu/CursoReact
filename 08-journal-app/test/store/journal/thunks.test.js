@@ -1,4 +1,17 @@
+
+import { collection, deleteDoc, getDocs } from "firebase/firestore/lite";
+import { addNewEmptyNote, savingNewNote, setActiveNote } from "../../../src/store/journal/journalSlice";
 import { startNewNote } from "../../../src/store/journal/thunks";
+import { firebaseDB } from "../../../src/firebase/config";
+
+
+// noteStructure{
+//   body: "",
+//   title: "",
+//   date: expect.any( Number ),
+//   id: expect.any( String ),
+//   imageUrls: [],
+// }
 
 describe('Pruebas en Journal Thunks', () => {
 
@@ -14,6 +27,34 @@ describe('Pruebas en Journal Thunks', () => {
         getState.mockReturnValue({ auth: { uid: uid } });
 
         await startNewNote()(dispatch, getState);
+
+        expect(dispatch).toHaveBeenCalledWith( savingNewNote() );
+
+        expect(dispatch).toHaveBeenCalledWith( addNewEmptyNote({
+          body: "",
+          title: "",
+          date: expect.any( Number ),
+          id: expect.any( String ),
+          imageUrls: [],
+        }));
+
+        expect(dispatch).toHaveBeenCalledWith( setActiveNote({
+          body: "",
+          title: "",
+          date: expect.any( Number ),
+          id: expect.any( String ),
+          imageUrls: [],
+        }));
+
+        // DeleteFomFirebase
+        const collectionRef = collection( firebaseDB, `${ uid }/journal/notes/` );
+        const docs = await getDocs( collectionRef );
+        
+        const deletePromises = [];
+        docs.forEach( doc =>  deletePromises.push( deleteDoc(doc.ref) ) );
+        
+        await Promise.all( deletePromises );
+
     });
     
 });
