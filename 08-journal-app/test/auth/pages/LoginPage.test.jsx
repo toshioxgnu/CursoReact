@@ -16,21 +16,22 @@ const store = configureStore({
 describe("Pruebas en <LoginPage />", () => {
 
   // TODO: Comentado hasta arrelar erroresd 
-  // test("Debe de mostrar el componente correctamente", () => {
-  //   render(
-  //     <Provider store={store} >
-  //       <MemoryRouter basename="/*" >
-  //         <LoginPage />
-  //       </MemoryRouter>
-  //     </Provider>
-  //   );
+  test("Debe de mostrar el componente correctamente", () => {
+    render(
+      <Provider store={store} >
+        <MemoryRouter >
+          <LoginPage />
+        </MemoryRouter>
+      </Provider>
+    );
 
-  //   screen.debug()
-  //   expect( screen.getAllByAltText('Login').length ).toBeGreaterThanOrEqual(1);
+    screen.debug()
+    expect( screen.getAllByText('Login').length ).toBeGreaterThanOrEqual(1);
 
-      test('Boton debe llamar startGoogleSignIn', () = > {
-        
-      } );
+  });
+  // test("Boton debe llamar startGoogleSignIn", () = > {
+  //   return (null)
+  // } );
   
   // });
 
@@ -40,3 +41,4 @@ describe("Pruebas en <LoginPage />", () => {
 
 
 });
+  

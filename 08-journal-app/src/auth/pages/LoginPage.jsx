@@ -1,23 +1,30 @@
-import { Google } from "@mui/icons-material"
-import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
+import Google from "@mui/icons-material/Google"
+import Alert from "@mui/material/Alert"
+import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
+import Link from "@mui/material/Link"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks/'
-import { checkingCredentials, startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
+import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth'
 import { AuthLayout } from '../layout/AuthLayout'
 
+
+const formData = {
+  email: '',
+  password: ''
+}
 
 export const LoginPage = () => {
 
 
-  const dispatch = useDispatch();
   const {  status, errorMessage } = useSelector( state => state.auth );
+  const dispatch = useDispatch();
 
-  const formData = {
-    email: '',
-    password: ''
-  }
+ 
 
   const { email,password, onInputChange }  = useForm(formData);
 
