@@ -1,34 +1,23 @@
 import React from 'react'
 import { NavBar } from '../components/NavBar'
 
-import { Calendar, momentLocalizer, dateFnsLocalizer  } from 'react-big-calendar';
+import { Calendar  } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
-import startOfWeek from 'date-fns/startOfWeek'
-import getDay from 'date-fns/getDay'
-import enUS from 'date-fns/locale/en-US'
+import { addHours } from 'date-fns';
+import { getMessagesEs, localizer } from '../../helpers';
 
 
-const locales = {
-  'en-US': enUS,
-}
+
 
 const myEventsList = [{
   title: 'Cumple Jefe',
   notes: 'Comprar el pastel',
-  start: new Date().setHours(13,0,0),
-  end: new Date().setHours(14,0,0),
+  start: new Date(),
+  end: addHours( new Date(), 2 ),
+  bgColor: '#fafafa'
 }];
 
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-})
 
 export const CalendarPage = () => {
   return (
@@ -36,12 +25,14 @@ export const CalendarPage = () => {
        <NavBar /> 
 
        <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 'calc(100vh - 80px)' }}
-    />
+        culture='es'
+        localizer={localizer}
+        events={myEventsList}
+        startAccessor="start"
+        endAccessor="end"
+        messages={ getMessagesEs() }
+        style={{ height: 'calc(100vh - 80px)' }}
+      />
     </>
   )
 }
