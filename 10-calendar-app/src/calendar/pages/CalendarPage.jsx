@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavBar, CalendarEvent } from '../'
 
 import { Calendar  } from 'react-big-calendar';
@@ -25,6 +25,8 @@ const myEventsList = [{
 
 export const CalendarPage = () => {
 
+  const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'week');
+
   const eventStyleGetter = ( event, start, end , isSelected ) => {
     // console.log({event, start, end , isSelected });
 
@@ -41,6 +43,19 @@ export const CalendarPage = () => {
 
   }
 
+  const onDoubleClick = (e) => {
+    console.log({ doubleClick: e })
+  }
+
+  const onSelect = (e) => {
+    console.log({ click: e })
+  }
+
+  const onViewChange = (e) => {
+    localStorage.setItem('lastView', e);
+    setlastView(e);
+    // console.log({ viewChanged: e })
+  }
 
   return (
     <>
@@ -50,6 +65,7 @@ export const CalendarPage = () => {
         culture='es'
         localizer={localizer}
         events={myEventsList}
+        defaultView={ lastView }
         startAccessor="start"
         endAccessor="end"
         messages={ getMessagesEs() }
@@ -58,6 +74,9 @@ export const CalendarPage = () => {
         components={{ 
           event: CalendarEvent,
          }}
+        onDoubleClickEvent={ onDoubleClick }
+        onSelectEvent={ onSelect }
+        onView={ onViewChange }
       />
     </>
   )
