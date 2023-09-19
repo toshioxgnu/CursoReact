@@ -1,12 +1,12 @@
 import { addHours, differenceInSeconds, isDate } from "date-fns";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import Modal from "react-modal";
 
-import { useUiStore } from '../../hooks'
+import { useCalendarStore, useUiStore } from '../../hooks'
 
 import es from "date-fns/locale/es";
 import Swal from "sweetalert2";
@@ -31,6 +31,8 @@ export const CalendarModal = () => {
 
   const { isDateModalOpen, closeDateModal } = useUiStore();
 
+  const { activeEvent } = useCalendarStore();
+
   const [formValues, setformValues] = useState({
     title: "",
     notes: "",
@@ -45,6 +47,16 @@ export const CalendarModal = () => {
 
     return formValues.title.length > 0 ? "" : "is-invalid";
   }, [formValues.title, formSubmitted]);
+
+  useEffect(() => {
+    if( !activeEvent != null ){
+      setformValues({ ...activeEvent })
+    }
+
+    return () => {
+      
+    };
+  }, [activeEvent])
 
   const onInputChanged = ({ target }) => {
     setformValues({
@@ -78,10 +90,6 @@ export const CalendarModal = () => {
     }
 
     if (formValues.title.length <= 0) return;
-
-    // TODO:
-    // Cerrar Modal
-    // Enviar Datos
 
     console.log(formValues);
   };
