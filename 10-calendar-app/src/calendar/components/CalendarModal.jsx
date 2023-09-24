@@ -31,13 +31,13 @@ export const CalendarModal = () => {
 
   const { isDateModalOpen, closeDateModal } = useUiStore();
 
-  const { activeEvent } = useCalendarStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
 
   const [formValues, setformValues] = useState({
-    title: "",
-    notes: "",
+    title: '',
+    notes: '',
     start: new Date(),
-    end: addHours(new Date(), 3),
+    end: addHours(new Date(), 2),
   });
 
   const [formSubmitted, setformSubmitted] = useState(false);
@@ -77,8 +77,9 @@ export const CalendarModal = () => {
     // console.log("cerrando modal");
   };
 
-  const onSubmit = (event) => {
+  const onSubmit =  (event) => {
     event.preventDefault();
+
 
     setformSubmitted(true);
 
@@ -91,7 +92,11 @@ export const CalendarModal = () => {
 
     if (formValues.title.length <= 0) return;
 
-    console.log(formValues);
+
+    console.log( 'formValues  ', formValues);
+    startSavingEvent(formValues);
+    closeDateModal();
+    setformSubmitted(false);
   };
 
   return (

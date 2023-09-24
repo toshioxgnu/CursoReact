@@ -6,7 +6,7 @@ const tempEvent = {
     title: 'Cumple Jefe',
     notes: 'Comprar el pastel',
     start: new Date(),
-    end: addHours( new Date(), 2 ),
+    end: addHours( new Date(), 1 ),
     bgColor: '#fafafa',
     user: {
         _id: "1233",
@@ -25,6 +25,23 @@ export const CalendarSlice = createSlice({
       onSetActiveNote: (state, { payload }) => {
         state.activeEvent = payload;
       },
+      onAddNewEvent: (state, {payload}) => {
+        state.events.push( payload );
+        state.activeEvent = null;
+
+      },
+      onUpdateEvent: (state, { payload }) => {
+        state.events = state.events.map(
+          event => {
+
+            if(event._id === payload._id){
+              return payload;
+            }
+
+            return event;
+          }
+        );
+      }
         
          
      }
@@ -32,5 +49,7 @@ export const CalendarSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onSetActiveNote
+    onSetActiveNote,
+    onAddNewEvent,
+    onUpdateEvent,
  } = CalendarSlice.actions;
