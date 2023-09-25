@@ -41,6 +41,16 @@ export const CalendarSlice = createSlice({
             return event;
           }
         );
+      },
+      onDeleteEvent: (state ) => {
+        if(state.activeEvent){
+          state.events = state.events.filter( 
+            event => event._id !== state.activeEvent._id
+          );
+          state.activeEvent = null;
+        }
+
+        
       }
         
          
@@ -52,4 +62,5 @@ export const {
     onSetActiveNote,
     onAddNewEvent,
     onUpdateEvent,
+    onDeleteEvent,
  } = CalendarSlice.actions;
