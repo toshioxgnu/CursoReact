@@ -12,17 +12,18 @@ const router = Router();
 
 // require login 
 // Obtener eventos 
-router.get('/',validarJWT ,getEventos );
+router.get('/' ,getEventos );
 
+router.use( validarJWT);
 // crear nuevo evento
-router.post('/',validarJWT ,crearEvento );
+router.post('/' ,crearEvento );
 
 
 // Actualizar Evento
-router.put('/:id',validarJWT ,actualizarEvento );
+router.put('/:id' ,actualizarEvento );
 
 // Actualizar Evento
-router.delete('/:id',validarJWT ,eliminarEvento  );
+router.delete('/:id' ,eliminarEvento  );
 
 
 module.exports = router;

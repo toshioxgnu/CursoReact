@@ -32,7 +32,7 @@ const eliminarEvento = (req, res=response ) => {
     
     res.json({
         ok: true,
-        msg: 'Actualizar Evento'
+        msg: 'Eliminar Evento'
     });
 
 }
