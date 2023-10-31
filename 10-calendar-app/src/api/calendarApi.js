@@ -8,7 +8,9 @@ const calendarApi = axios.create({
 });
 
 //TODO: Configurar interceptores
-
+calendarApi.interceptors.request.use(
+    
+)
 
 
 
