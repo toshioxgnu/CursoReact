@@ -6,7 +6,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import { addHours } from 'date-fns';
 import { getMessagesEs, localizer } from '../../helpers';
-import { useUiStore, useCalendarStore } from '../../hooks';
+import { useUiStore, useCalendarStore, useAuthStore } from '../../hooks';
 
 
 // const myEventsList = [
@@ -26,6 +26,8 @@ import { useUiStore, useCalendarStore } from '../../hooks';
 
 export const CalendarPage = () => {
 
+  const { user } = useAuthStore();
+  // console.log(user)
   const { openDateModal } = useUiStore();
 
   const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
@@ -33,10 +35,13 @@ export const CalendarPage = () => {
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'week');
 
   const eventStyleGetter = ( event, start, end , isSelected ) => {
+    console.log({event})
     // console.log({event, start, end , isSelected });
 
+    const isMyEvent = (event.user._id === user.uid ) || (user.uid === event.user._id ) ;
+
     const style = {
-      backgroundColor: "#347cf7",
+      backgroundColor: isMyEvent ? "#347cf7" : "#465660" ,
       borderRadius: '0px',
       opcity: 0.8,
       color: "white"
@@ -56,7 +61,6 @@ export const CalendarPage = () => {
   const onSelect = (event) => {
     // console.log({ click: e });
     setActiveEvent(event);
-    openDateModal();
   }
 
   const onViewChange = (e) => {
@@ -66,6 +70,7 @@ export const CalendarPage = () => {
   }
 
   useEffect(() => {
+    console.log('useEffect triggered')
     startLoadingEvents()
   }, []);
 
