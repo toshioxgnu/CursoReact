@@ -56,6 +56,7 @@ export const CalendarPage = () => {
   const onSelect = (event) => {
     // console.log({ click: e });
     setActiveEvent(event);
+    openDateModal();
   }
 
   const onViewChange = (e) => {
